@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copywriting Expert — Методическое руководство (2026)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        brand: {
+                            orange: '#f97316',
+                            orangeHover: '#ea580c',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        serif: ['Lora', 'Georgia', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Chart.js for beautiful interactive visuals -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- MathJax for TeX Formulas -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        h1, h2, h3, .serif-font {
+            font-family: 'Lora', serif;
+        }
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+        /* Custom transitions for SPA sections */
+        .content-section {
+            transition: opacity 0.25s ease-in-out;
+        }
+        /* Glass effect navigation */
+        .glass-sidebar {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Mobile Header -->
+    <header class="lg:hidden bg-slate-900 text-white p-4 flex justify-between items-center sticky top-0 z-50 shadow-md">
+        <div class="flex items-center space-x-2">
+            <span class="font-bold text-lg tracking-tight serif-font">Copywriting <span class="text-brand-orange">Expert</span></span>
+        </div>
+        <button id="mobileMenuBtn" class="p-2 focus:outline-none focus:bg-slate-800 rounded">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </header>
+
+    <!-- Main Container -->
+    <div class="flex flex-1 relative min-h-screen">
+        
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:static lg:flex flex-col w-80 bg-slate-900 text-slate-300 z-40 border-r border-slate-800 shadow-2xl h-screen sticky top-0 overflow-y-auto">
+            <div class="p-6 border-b border-slate-800 flex items-center justify-between">
+                <div>
+                    <h1 class="text-xl font-bold text-white tracking-wide serif-font">Copywriting <span class="text-brand-orange">Expert</span></h1>
+                    <span class="text-[10px] text-slate-500 uppercase tracking-widest font-semibold block mt-1">Обучающий курс • 2026</span>
+                </div>
+                <button id="closeMobileMenuBtn" class="lg:hidden text-slate-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Program Progress -->
+            <div class="p-4 bg-slate-800/40 m-4 rounded-xl border border-slate-800/60">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-xs font-semibold text-slate-400">Прогресс изучения:</span>
+                    <span id="progressPercent" class="text-xs font-bold text-brand-orange">0%</span>
+                </div>
+                <div class="w-full bg-slate-700 rounded-full h-1.5">
+                    <div id="progressBar" class="bg-brand-orange h-1.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Navigation Links (SPA Tab-Switchers) -->
+            <nav class="flex-1 px-4 space-y-1 py-4">
+                <a href="#overview" id="nav-overview" class="nav-item flex items-center px-4 py-2.5 text-sm font-medium rounded-lg transition-colors hover:bg-slate-800 hover:text-white text-slate-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-600 mr-3"></span>
+                    <span>Обзор методологии</span>
+                </a>
+                <a href="#psychology" id="nav-psychology" class="nav-item flex items-center px-4 py-2.5 text-sm font-medium rounded-lg transition-colors hover:bg-slate-800 hover:text-white text-slate-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-600 mr-3"></span>
+                    <span>1. Психология прямого отклика</span>
+                </a>
+                <a href="#headlines" id="nav-headlines" class="nav-item flex items-center px-4 py-2.5 text-sm font-medium rounded-lg transition-colors hover:bg-slate-800 hover:text-white text-slate-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-600 mr-3"></span>
+                    <span>2. Проектирование заголовочных комплексов</span>
+                </a>
+                <a href="#stylistics" id="nav-stylistics" class="nav-item flex items-center px-4 py-2.5 text-sm font-medium rounded-lg transition-colors hover:bg-slate-800 hover:text-white text-slate-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-600 mr-3"></span>
+                    <span>3. Стилистическая редактура</span>
+                </a>
+                <a href="#usability" id="nav-usability" class="nav-item flex items-center px-4 py-2.5 text-sm font-medium rounded-lg transition-colors hover:bg-slate-800 hover:text-white text-slate-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-600 mr-3"></span>
+                    <span>4. Веб-юзабилити контента</span>
+                </a>
+                <a href="#uxwriting" id="nav-uxwriting" class="nav-item flex items-center px-4 py-2.5 text-sm font-medium rounded-lg transition-colors hover:bg-slate-800 hover:text-white text-slate-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-600 mr-3"></span>
+                    <span>5. UX-писательство и микротекст</span>
+                </a>
+                <a href="#seo" id="nav-seo" class="nav-item flex items-center px-4 py-2.5 text-sm font-medium rounded-lg transition-colors hover:bg-slate-800 hover:text-white text-slate-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-600 mr-3"></span>
+                    <span>6. Поисковая семантика</span>
+                </a>
+                <a href="#quiz" id="nav-quiz" class="nav-item flex items-center px-4 py-2.5 text-sm font-medium rounded-lg transition-colors hover:bg-slate-800 hover:text-white text-slate-400 border-t border-slate-800/80 mt-4 pt-4">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-orange mr-3"></span>
+                    <span>Итоговый экспресс-тест (Проверьте себя)</span>
+                </a>
+                <a href="#sources" id="nav-sources" class="nav-item flex items-center px-4 py-2.5 text-sm font-medium rounded-lg transition-colors hover:bg-slate-800 hover:text-white text-slate-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-600 mr-3"></span>
+                    <span>Библиографические источники</span>
+                </a>
+            </nav>
+
+            <div class="p-6 border-t border-slate-800 text-[11px] text-slate-500">
+                <p>© 2026 Copywriting Expert.</p>
+                <p class="mt-0.5">Все права защищены законом.</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-grow overflow-y-auto px-4 py-8 lg:px-12 lg:py-12 max-w-7xl mx-auto w-full">
+            
+            <!-- SPA Sections Container -->
+            <div id="contentModules" class="space-y-0">
+
+                <!-- Module: Overview -->
+                <section id="section-overview" class="content-section bg-white rounded-2xl p-6 lg:p-10 shadow-sm border border-slate-200/80 hidden">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 font-semibold text-xs rounded-full uppercase tracking-wider">Вводная часть</span>
+                        <label class="flex items-center space-x-2 cursor-pointer bg-slate-100 px-3 py-1.5 rounded-lg hover:bg-slate-200 transition-colors">
+                            <input type="checkbox" class="section-complete-checkbox" data-section="overview">
+                            <span class="text-xs font-medium text-slate-700">Изучено</span>
+                        </label>
+                    </div>
+
+                    <h2 class="text-4xl font-extrabold text-slate-950 mb-6 leading-tight">Обзор методологии коммерческого текста</h2>
+                    
+                    <div class="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-6">
+                        <p class="text-lg text-slate-700 leading-relaxed font-light">
+                            Профессиональный копирайтинг — это прикладная дисциплина на стыке трех китов: когнитивной психологии, лингвистики и прикладного маркетинга. Настоящий курс построен на интеграции трех важнейших исторических школ, адаптированных под жесткие реалии перенасыщенного медиапотребления 2026 года.
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+                            <div class="p-6 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
+                                <div>
+                                    <div class="text-brand-orange font-bold text-lg mb-2">Direct Response (DR)</div>
+                                    <p class="text-xs text-slate-600">
+                                        Школа рекламы прямого отклика (Клод Хопкинс, Джон Кейплз, Джозеф Шугерман). Фокус на абсолютной измеримости эффективности каждого написанного слова и немедленной реакции читателя.
+                                    </p>
+                                </div>
+                                <span class="text-[10px] uppercase font-bold text-slate-400 mt-4">Ориентация: Действие</span>
+                            </div>
+                            <div class="p-6 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
+                                <div>
+                                    <div class="text-brand-orange font-bold text-lg mb-2">Cognitive Science</div>
+                                    <p class="text-xs text-slate-600">
+                                        Теория поведенческой экономики и психолингвистики (Роберт Чалдини, Даниэль Канеман). Механика преодоления психологических фильтров, защита от когнитивной перегрузки, работа с эвристиками принятия решений.
+                                    </p>
+                                </div>
+                                <span class="text-[10px] uppercase font-bold text-slate-400 mt-4">Ориентация: Доверие</span>
+                            </div>
+                            <div class="p-6 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
+                                <div>
+                                    <div class="text-brand-orange font-bold text-lg mb-2">Digital UX & Clean Style</div>
+                                    <p class="text-xs text-slate-600">
+                                        Школа интерфейсного текста и сильного текста (Торри Подмажерски, Нора Галь, Якоб Нильсен). Проектирование понятных сценариев, устранение словесного шума и организация текста для комфортного сканирования на экранах.
+                                    </p>
+                                </div>
+                                <span class="text-[10px] uppercase font-bold text-slate-400 mt-4">Ориентация: Удобство</span>
+                            </div>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-slate-900 mt-8 mb-4">Сравнительный анализ фундаментальных подходов</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse text-sm my-4">
+                                <thead>
+                                    <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
+                                        <th class="p-3 font-semibold">Параметр сравнения</th>
+                                        <th class="p-3 font-semibold">Школа прямого отклика (Шугерман, Кейплз)</th>
+                                        <th class="p-3 font-semibold">Информационный стиль (Ильяхов)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200">
+                                    <tr>
+                                        <td class="p-3 font-medium text-slate-950">Ключевой триггер</td>
+                                        <td class="p-3">Эмоция, любопытство, импульсивный стимул.</td>
+                                        <td class="p-3">Объективная польза, понятность, прагматизм.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-medium text-slate-950">Вектор аргументации</td>
+                                        <td class="p-3">От боли потенциального клиента к быстрому решению.</td>
+                                        <td class="p-3">От фактов и сценариев к обоснованному выбору.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-medium text-slate-950">Отношение к объему</td>
+                                        <td class="p-3">«Длинный текст продает лучше, если он интересен».</td>
+                                        <td class="p-3">«Сокращай всё, что не несёт новой полезной информации».</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p class="text-sm text-slate-500 italic mt-4">
+                            Источники: Клод Хопкинс, «Научная реклама» (1923) <a href="#sources" class="text-blue-500 hover:underline">[1]</a>; Максим Ильяхов, «Пиши, сокращай» (2016) <a href="#sources" class="text-blue-500 hover:underline">[2]</a>.
+                        </p>
+                    </div>
+
+                    <!-- Exercises Block -->
+                    <div class="mt-8 pt-8 border-t border-slate-100 bg-slate-50 p-6 rounded-xl">
+                        <h4 class="font-bold text-slate-900 mb-3 flex items-center">
+                            <svg class="w-5 h-5 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                            Закрепляющее упражнение: Анализ структуры
+                        </h4>
+                        <p class="text-sm text-slate-600 mb-4">
+                            Найдите в сети любую промо-страницу онлайн-сервиса. Разделите её текст на две колонки: приёмы классического директ-респонса (триггеры, дефицит) и приёмы информационного стиля (факты, отсутствие «воды»). Каких элементов больше и почему?
+                        </p>
+                        <textarea class="w-full p-3 border border-slate-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500 h-28 placeholder-slate-400" placeholder="Запишите ваш анализ здесь..."></textarea>
+                        <div class="mt-3 flex justify-between items-center">
+                            <span class="text-xs text-slate-400">Рекомендуемое время выполнения: 20 минут</span>
+                            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow transition-colors save-exercise-btn">Сохранить ответ</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module: Psychology -->
+                <section id="section-psychology" class="content-section bg-white rounded-2xl p-6 lg:p-10 shadow-sm border border-slate-200/80 hidden">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 font-semibold text-xs rounded-full uppercase tracking-wider">Модуль 1</span>
+                        <label class="flex items-center space-x-2 cursor-pointer bg-slate-100 px-3 py-1.5 rounded-lg hover:bg-slate-200 transition-colors">
+                            <input type="checkbox" class="section-complete-checkbox" data-section="psychology">
+                            <span class="text-xs font-medium text-slate-700">Изучено</span>
+                        </label>
+                    </div>
+
+                    <h2 class="text-3xl font-extrabold text-slate-950 mb-6 leading-tight">Психология прямого отклика и преодоление критических барьеров</h2>
+                    
+                    <div class="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-6">
+                        <p class="text-lg text-slate-700 leading-relaxed italic border-l-4 border-orange-500 pl-6">
+                            «Ваша единственная задача при написании первого предложения — заставить человека прочитать второе. Копирайтинг — это создание непреодолимого ментального импульса». — Джозеф Шугерман.
+                        </p>
+
+                        <h3 class="text-2xl font-bold text-slate-900 mt-8">1.1 Архитектура «Скользкой горки»</h3>
+                        <p>
+                            Согласно методологии классика прямого отклика Джозефа Шугермана, текст должен работать как гравитационный спуск. Если человек наступил на верхний край (заголовок), он должен докатиться до самого низа (кнопки целевого действия) без остановок. Для создания этого эффекта используются три ключевых элемента:
+                        </p>
+                        <ul class="list-disc pl-6 space-y-2 text-sm bg-slate-50 p-6 rounded-xl border border-slate-200">
+                            <li><strong>Микро-вступление (The Hook):</strong> Первое предложение обязано быть максимально коротким и понятным. Никаких сложных деепричастных оборотов. Пример: <em>«Это произошло ночью.»</em> или <em>«Вам лгали.»</em></li>
+                            <li><strong>Зацепки любопытства (Seeds of Curiosity):</strong> Короткие связки-абзацы в конце смысловых блоков, которые разжигают интерес продолжать чтение. Пример: <em>«Но это было только начало.»</em>, <em>«И вот почему это важно:»</em></li>
+                            <li><strong>Эффект незавершенного действия:</strong> Постепенное раскрытие ценности через удержание интриги, плавно подводящее к аргументации.</li>
+                        </ul>
+
+                        <h3 class="text-2xl font-bold text-slate-900 mt-8">1.2 Система психологических триггеров влияния</h3>
+                        <p>
+                            Роберт Чалдини научно доказал наличие автоматических паттернов поведения. В современном копирайтинге 2026 года мы интегрируем эти триггеры не навязчиво, а на уровне архитектуры смыслов:
+                        </p>
+
+                        <div class="chart-container">
+                            <canvas id="chartPsychology"></canvas>
+                        </div>
+                        <p class="text-xs text-center text-slate-400 -mt-4 mb-8 italic">Весовой коэффициент убедительности психологических триггеров при принятии решения по исследованиям поведения потребителей.</p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                            <div class="p-6 border border-slate-200 rounded-xl bg-slate-50">
+                                <h4 class="font-bold text-slate-900 mb-2">Формула AIDA</h4>
+                                <div class="text-sm space-y-1 text-slate-700">
+                                    <p><strong>A - Attention:</strong> Внимание — сильный заголовок.</p>
+                                    <p><strong>I - Interest:</strong> Интерес — презентация острой боли.</p>
+                                    <p><strong>D - Desire:</strong> Желание — описание выгод продукта.</p>
+                                    <p><strong>A - Action:</strong> Действие — однозначный CTA.</p>
+                                </div>
+                                <div class="mt-3 text-xs text-blue-600 font-semibold bg-blue-50 p-2 rounded">
+                                    Математическое выражение: $AIDA = A \times I \times D \times A$ (если один множитель равен нулю, вся конверсия равна нулю).
+                                </div>
+                            </div>
+
+                            <div class="p-6 border border-slate-200 rounded-xl bg-slate-50">
+                                <h4 class="font-bold text-slate-900 mb-2">Формула PMHS</h4>
+                                <div class="text-sm space-y-1 text-slate-700">
+                                    <p><strong>P - Pain:</strong> Боль — формулировка проблемы.</p>
+                                    <p><strong>M - More Pain:</strong> Усиление боли — последствия бездействия.</p>
+                                    <p><strong>H - Hope:</strong> Надежда — появление решения.</p>
+                                    <p><strong>S - Solution:</strong> Решение — ваш продукт.</p>
+                                </div>
+                                <div class="mt-3 text-xs text-amber-600 font-semibold bg-amber-50 p-2 rounded">
+                                    Идеально подходит для сложных B2B-продуктов и долгосрочных услуг.
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-slate-500 italic mt-4">
+                            Источники: Роберт Чалдини, «Психология влияния» (2001) <a href="#sources" class="text-blue-500 hover:underline">[3]</a>; Даниэль Канеман, «Думай медленно... решай быстро» (2011).
+                        </p>
+                    </div>
+
+                    <!-- Exercises Block -->
+                    <div class="mt-8 pt-8 border-t border-slate-100 bg-slate-50 p-6 rounded-xl">
+                        <h4 class="font-bold text-slate-900 mb-3 flex items-center">
+                            <svg class="w-5 h-5 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                            Закрепляющее упражнение: Проектирование по PMHS
+                        </h4>
+                        <p class="text-sm text-slate-600 mb-4">
+                            Напишите рекламный пост для продукта «Ортопедическая подушка от болей в шее» по формуле $PMHS$. Сделайте упор на физиологические последствия плохого сна (усталость, головные боли).
+                        </p>
+                        <textarea class="w-full p-3 border border-slate-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500 h-28 placeholder-slate-400" placeholder="Напишите текст здесь..."></textarea>
+                        <div class="mt-3 flex justify-between items-center">
+                            <span class="text-xs text-slate-400">Рекомендуемое время выполнения: 25 минут</span>
+                            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow transition-colors save-exercise-btn">Сохранить ответ</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module: Headlines -->
+                <section id="section-headlines" class="content-section bg-white rounded-2xl p-6 lg:p-10 shadow-sm border border-slate-200/80 hidden">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 font-semibold text-xs rounded-full uppercase tracking-wider">Модуль 2</span>
+                        <label class="flex items-center space-x-2 cursor-pointer bg-slate-100 px-3 py-1.5 rounded-lg hover:bg-slate-200 transition-colors">
+                            <input type="checkbox" class="section-complete-checkbox" data-section="headlines">
+                            <span class="text-xs font-medium text-slate-700">Изучено</span>
+                        </label>
+                    </div>
+
+                    <h2 class="text-3xl font-extrabold text-slate-950 mb-6 leading-tight">Проектирование заголовочных комплексов</h2>
+                    
+                    <div class="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-6">
+                        <p class="text-lg text-slate-700 leading-relaxed">
+                            Согласно классическим исследованиям рекламного рынка, заголовок читают в среднем в 5 раз чаще, чем основной текст. Это означает, что **80% бюджета** на создание текста тратится именно на заголовок.
+                        </p>
+
+                        <h3 class="text-2xl font-bold text-slate-900 mt-8 mb-4">Технология 4U: Матрица проектирования</h3>
+                        <p>Наиболее эффективная прагматическая модель построения заголовка для коммерческих предложений и лендингов — формула $4U$:</p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 my-6">
+                            <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 text-center">
+                                <div class="text-2xl font-extrabold text-blue-600 mb-1">U1</div>
+                                <div class="font-bold text-slate-900 text-sm mb-1">Usefulness</div>
+                                <div class="text-xs text-slate-500">Польза. Какую выгоду получит клиент?</div>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 text-center">
+                                <div class="text-2xl font-extrabold text-blue-600 mb-1">U2</div>
+                                <div class="font-bold text-slate-900 text-sm mb-1">Ultra-specificity</div>
+                                <div class="text-xs text-slate-500">Специфичность. Выразите пользу в цифрах.</div>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 text-center">
+                                <div class="text-2xl font-extrabold text-blue-600 mb-1">U3</div>
+                                <div class="font-bold text-slate-900 text-sm mb-1">Urgency</div>
+                                <div class="text-xs text-slate-500">Срочность. За какой период решится проблема?</div>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 text-center">
+                                <div class="text-2xl font-extrabold text-blue-600 mb-1">U4</div>
+                                <div class="font-bold text-slate-900 text-sm mb-1">Uniqueness</div>
+                                <div class="text-xs text-slate-500">Уникальность. За счёт чего это произойдет?</div>
+                            </div>
+                        </div>
+
+                        <div class="chart-container">
+                            <canvas id="chartHeadlines"></canvas>
+                        </div>
+                        <p class="text-xs text-center text-slate-400 -mt-4 mb-8 italic">Сравнение эффективности различных типов заголовочных конструкций (по данным исследований Дж. Кейплза).</p>
+
+                        <h3 class="text-xl font-bold text-slate-900 mt-8 mb-4">Пять уровней осведомленности клиентов (по Юджину Шварцу)</h3>
+                        <p>Вы не можете предлагать скидку тому, кто даже не знает о существовании проблемы. Напишите заголовок под теплоту вашей аудитории:</p>
+                        <div class="overflow-hidden rounded-xl border border-slate-200 shadow-sm my-6 bg-white">
+                            <table class="w-full text-left text-sm">
+                                <thead class="bg-slate-900 text-white text-xs uppercase tracking-wider">
+                                    <tr>
+                                        <th class="p-4">Уровень</th>
+                                        <th class="p-4">Характеристика читателя</th>
+                                        <th class="p-4">Пример заголовка</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200 text-xs">
+                                    <tr>
+                                        <td class="p-4 font-bold text-slate-900">1. Неведение</td>
+                                        <td class="p-4">Не знает о проблеме, живет комфортно.</td>
+                                        <td class="p-4 italic">«Почему 80% компаний переплачивают за логистику»</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 font-bold text-slate-900">2. Осведомлен</td>
+                                        <td class="p-4">Чувствует боль, но не знает решений.</td>
+                                        <td class="p-4 italic">«Как без таблеток избавиться от усталости за 15 минут в день»</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 font-bold text-slate-900">3. Выбор класса</td>
+                                        <td class="p-4">Знает о решениях, ищет правильный метод.</td>
+                                        <td class="p-4 italic">«Почему умные планировщики задач работают быстрее ручных заметок»</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 font-bold text-slate-900">4. Выбор продукта</td>
+                                        <td class="p-4">Сравнивает вашу компанию с конкурентами.</td>
+                                        <td class="p-4 italic">«CRM-система LeadForce с ИИ-ассистентом и бесплатным тестом на 14 дней»</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 font-bold text-slate-900">5. Покупка</td>
+                                        <td class="p-4">Готов купить прямо сейчас, ждет финала.</td>
+                                        <td class="p-4 italic">«Купите подписку LeadForce со скидкой 40% до конца пятницы»</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Exercises Block -->
+                    <div class="mt-8 pt-8 border-t border-slate-100 bg-slate-50 p-6 rounded-xl">
+                        <h4 class="font-bold text-slate-900 mb-3 flex items-center">
+                            <svg class="w-5 h-5 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                            Закрепляющее упражнение: Написание заголовков 4U
+                        </h4>
+                        <p class="text-sm text-slate-600 mb-4">
+                            Разработайте 3 варианта заголовка по формуле $4U$ для онлайн-школы изучения английского языка для IT-специалистов. Выделите в скобках каждый из 4-х компонентов формулы.
+                        </p>
+                        <textarea class="w-full p-3 border border-slate-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500 h-28 placeholder-slate-400" placeholder="Вариант 1:&#10;Вариант 2:&#10;Вариант 3:"></textarea>
+                        <div class="mt-3 flex justify-between items-center">
+                            <span class="text-xs text-slate-400">Рекомендуемое время выполнения: 15 минут</span>
+                            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow transition-colors save-exercise-btn">Сохранить ответ</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module: Stylistics -->
+                <section id="section-stylistics" class="content-section bg-white rounded-2xl p-6 lg:p-10 shadow-sm border border-slate-200/80 hidden">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 font-semibold text-xs rounded-full uppercase tracking-wider">Модуль 3</span>
+                        <label class="flex items-center space-x-2 cursor-pointer bg-slate-100 px-3 py-1.5 rounded-lg hover:bg-slate-200 transition-colors">
+                            <input type="checkbox" class="section-complete-checkbox" data-section="stylistics">
+                            <span class="text-xs font-medium text-slate-700">Изучено</span>
+                        </label>
+                    </div>
+
+                    <h2 class="text-3xl font-extrabold text-slate-950 mb-6 leading-tight">Стилистическая редактура и синтаксис</h2>
+                    
+                    <div class="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-6">
+                        <p class="text-lg text-slate-700 leading-relaxed">
+                            Основа сильного текста — отсутствие словесного мусора (энтропии) и ясность синтаксической структуры. Текст должен быть легким для восприятия и не вызывать у читателя когнитивной перегрузки.
+                        </p>
+
+                        <div class="bg-rose-50 border-l-4 border-rose-500 p-4 rounded-r-xl my-6">
+                            <h4 class="font-bold text-rose-950 text-sm mb-1">Закон сохранения внимания читателя</h4>
+                            <p class="text-xs text-rose-900 leading-relaxed">
+                                Каждое лишнее слово, сложная грамматическая конструкция или канцелярит увеличивают ментальные усилия читателя, приближая его к закрытию вкладки вашего сайта.
+                            </p>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-slate-900 mt-8 mb-4">Основные стилистические пороки</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                            <div class="p-5 border border-slate-100 rounded-xl bg-slate-50">
+                                <h4 class="font-bold text-slate-900 text-sm mb-2">Канцелярит и номинализация</h4>
+                                <p class="text-xs leading-relaxed">Замена живых глаголов отглагольными существительными и тяжелыми предлогами. <br><strong class="text-rose-600">Плохо:</strong> «Мы осуществляем деятельность по оказанию услуг в сфере доставки». <br><strong class="text-green-600">Хорошо:</strong> «Мы доставляем продукты».</p>
+                            </div>
+                            <div class="p-5 border border-slate-100 rounded-xl bg-slate-50">
+                                <h4 class="font-bold text-slate-900 text-sm mb-2">Пассивный залог</h4>
+                                <p class="text-xs leading-relaxed">Пассивные конструкции размывают ответственность и делают повествование вялым. <br><strong class="text-rose-600">Плохо:</strong> «Документ был подписан директором». <br><strong class="text-green-600">Хорошо:</strong> «Директор подписал документ».</p>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Tool: Before/After -->
+                        <div class="bg-slate-900 text-slate-100 p-6 rounded-xl my-8">
+                            <h4 class="font-bold text-white mb-4 flex items-center text-sm">
+                                <span class="w-2.5 h-2.5 bg-green-500 rounded-full mr-2"></span>
+                                Интерактивный тренажер: Сравнение «До / После»
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                                <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                                    <div class="text-rose-400 font-bold mb-2 uppercase tracking-wider">Исходный текст (с канцеляритом)</div>
+                                    <p class="text-slate-300 leading-relaxed">
+                                        «В целях повышения качества обслуживания клиентов нашей компанией было принято решение об осуществлении перехода на круглосуточный режим работы технической поддержки».
+                                    </p>
+                                </div>
+                                <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                                    <div class="text-green-400 font-bold mb-2 uppercase tracking-wider">Отредактированный текст (инфостиль)</div>
+                                    <p class="text-slate-100 leading-relaxed">
+                                        «Чтобы быстрее отвечать на ваши вопросы, мы перевели службу поддержки на круглосуточную работу».
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-slate-900 mt-8 mb-4">Правила построения динамичного синтаксиса</h3>
+                        <ul class="list-disc pl-5 space-y-2 text-sm text-slate-700">
+                            <li><strong>Закон абзаца:</strong> Один абзац должен выражать строго одну законченную мысль. Оптимальная длина абзаца — 3–5 строк.</li>
+                            <li><strong>Темпоритм:</strong> Чередуйте короткие, средние и длинные предложения. Это создает естественный ритм речи, не утомляющий мозг.</li>
+                            <li><strong>Удаление плеоназмов:</strong> Исключайте избыточные словосочетания («главный приоритет», «свободная вакансия», «свой собственный»).</li>
+                        </ul>
+
+                        <p class="text-sm text-slate-500 italic mt-4">
+                            Источники: Нора Галь, «Слово живое и мертвое» (1972) <a href="#sources" class="text-blue-500 hover:underline">[5]</a>; Уильям Зинсер, «Как писать хорошо» (1976) <a href="#sources" class="text-blue-500 hover:underline">[6]</a>.
+                        </p>
+                    </div>
+
+                    <!-- Exercises Block -->
+                    <div class="mt-8 pt-8 border-t border-slate-100 bg-slate-50 p-6 rounded-xl">
+                        <h4 class="font-bold text-slate-900 mb-3 flex items-center">
+                            <svg class="w-5 h-5 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                            Закрепляющее упражнение: Чистка текста
+                        </h4>
+                        <p class="text-sm text-slate-600 mb-4">
+                            Очистите от канцелярита и штампов следующую фразу: <em>«В настоящее время со стороны нашего предприятия предпринимаются все необходимые шаги по оптимизации процессов логистического характера»</em>.
+                        </p>
+                        <textarea class="w-full p-3 border border-slate-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500 h-24 placeholder-slate-400" placeholder="Напишите ваш лаконичный вариант здесь..."></textarea>
+                        <div class="mt-3 flex justify-between items-center">
+                            <span class="text-xs text-slate-400">Рекомендуемое время выполнения: 10 минут</span>
+                            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow transition-colors save-exercise-btn">Сохранить ответ</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module: Usability -->
+                <section id="section-usability" class="content-section bg-white rounded-2xl p-6 lg:p-10 shadow-sm border border-slate-200/80 hidden">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 font-semibold text-xs rounded-full uppercase tracking-wider">Модуль 4</span>
+                        <label class="flex items-center space-x-2 cursor-pointer bg-slate-100 px-3 py-1.5 rounded-lg hover:bg-slate-200 transition-colors">
+                            <input type="checkbox" class="section-complete-checkbox" data-section="usability">
+                            <span class="text-xs font-medium text-slate-700">Изучено</span>
+                        </label>
+                    </div>
+
+                    <h2 class="text-3xl font-extrabold text-slate-950 mb-6 leading-tight">Веб-юзабилити контента</h2>
+                    
+                    <div class="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-6">
+                        <p class="text-lg text-slate-700 leading-relaxed">
+                            Пользователи практически никогда не читают веб-страницы слово за словом. Вместо этого они бегло сканируют страницу в поисках ключевых зацепок. Копирайтинг для цифровой среды должен проектироваться с учётом эргономики чтения.
+                        </p>
+
+                        <h3 class="text-xl font-bold text-slate-900 mt-8 mb-4">Паттерны чтения (Nielsen Norman Group)</h3>
+                        <p>Айтрекинговые исследования показывают стабильное воспроизведение нескольких паттернов сканирования экрана:</p>
+                        
+                        <ul class="list-disc pl-5 space-y-2 text-sm text-slate-700">
+                            <li><strong>F-паттерн:</strong> Чтение верхних строк, затем короткий горизонтальный сдвиг чуть ниже и сканирование только левого края.</li>
+                            <li><strong>Z-паттерн:</strong> Движение по диагонали из левого верхнего угла в правый нижний. Идеально для лендингов.</li>
+                            <li><strong>Паттерн слоёного пирога (Layer Cake):</strong> Чтение строго по подзаголовкам и спискам без прочтения абзацев.</li>
+                        </ul>
+
+                        <!-- Interactive Simulation Widget -->
+                        <div class="bg-slate-100 p-6 rounded-xl my-8 border border-slate-200">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="font-bold text-slate-900 text-sm">Интерактивный симулятор тепловой карты (F-паттерн)</h4>
+                                <button id="toggleHeatmapBtn" class="px-3 py-1.5 bg-slate-800 text-white rounded text-xs hover:bg-slate-700 transition">Включить тепловую карту</button>
+                            </div>
+                            
+                            <div id="simulationContainer" class="relative p-6 bg-white rounded-lg border border-slate-300 transition-all duration-300">
+                                <!-- Text content to scan -->
+                                <div class="space-y-4">
+                                    <h5 class="text-lg font-bold text-slate-900">1. Заголовок первого уровня всегда привлекает 100% внимания</h5>
+                                    <p class="text-sm text-slate-600 max-w-xl">
+                                        Это первая горизонтальная линия взгляда. Сюда нужно поместить главное предложение или ценностное предложение продукта, выраженное простыми словами.
+                                    </p>
+                                    <h6 class="text-sm font-bold text-slate-900">2. Подзаголовок важнее, чем внутренний текст</h6>
+                                    <p class="text-sm text-slate-600 max-w-md">
+                                        Вторая горизонтальная линия. Читатель ещё готов воспринимать короткие структуры.
+                                    </p>
+                                    <div class="bg-blue-50 p-3 rounded text-xs border border-blue-100">
+                                        • Полезный пункт маркированного списка<br>
+                                        • Важная цифра или факт, расположенный слева
+                                    </div>
+                                    <p class="text-xs text-slate-400 max-w-xs">
+                                        Этот мелкий текст в самом низу страницы прочитает менее 15% всех зашедших пользователей, потому что внимание к этой области минимальное.
+                                    </p>
+                                </div>
+                                <!-- Heatmap Overlay Grid -->
+                                <div id="heatmapOverlay" class="absolute inset-0 heatmap-grid opacity-0 pointer-events-none rounded-lg transition-opacity duration-300"></div>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-slate-900 mt-8 mb-4">Чек-лист визуальной доступности текста</h3>
+                        <ol class="list-decimal pl-5 space-y-2 text-sm text-slate-700">
+                            <li><strong>Длина строки:</strong> Оптимально — от 50 до 75 символов с пробелами. Слишком длинные строки утомляют глаза.</li>
+                            <li><strong>Контрастность:</strong> Текст должен легко читаться при любом освещении. Избегайте серого текста на белом фоне.</li>
+                            <li><strong>Маркированные списки:</strong> Превращайте любые перечисления от 3 элементов в списки.</li>
+                        </ol>
+
+                        <p class="text-sm text-slate-500 italic mt-4">
+                            Источники: Якоб Нильсен, «Веб-дизайн» (2000) <a href="#sources" class="text-blue-500 hover:underline">[7]</a>.
+                        </p>
+                    </div>
+
+                    <!-- Exercises Block -->
+                    <div class="mt-8 pt-8 border-t border-slate-100 bg-slate-50 p-6 rounded-xl">
+                        <h4 class="font-bold text-slate-900 mb-3 flex items-center">
+                            <svg class="w-5 h-5 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                            Закрепляющее упражнение: Проектирование разметки лендинга
+                        </h4>
+                        <p class="text-sm text-slate-600 mb-4">
+                            Возьмите любой сплошной текст объёмом в 2 страницы. Нарисуйте схему того, как бы вы разбили его на блоки, чтобы он соответствовал Z-паттерну чтения. Опишите, какие элементы (заголовки, списки, иллюстрации) будут находиться на вершинах и гранях траектории движения взгляда.
+                        </p>
+                        <textarea class="w-full p-3 border border-slate-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500 h-28 placeholder-slate-400" placeholder="Опишите схему расположения блоков..."></textarea>
+                        <div class="mt-3 flex justify-between items-center">
+                            <span class="text-xs text-slate-400">Рекомендуемое время выполнения: 20 минут</span>
+                            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow transition-colors save-exercise-btn">Сохранить ответ</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module: UX-Writing -->
+                <section id="section-uxwriting" class="content-section bg-white rounded-2xl p-6 lg:p-10 shadow-sm border border-slate-200/80 hidden">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 font-semibold text-xs rounded-full uppercase tracking-wider">Модуль 5</span>
+                        <label class="flex items-center space-x-2 cursor-pointer bg-slate-100 px-3 py-1.5 rounded-lg hover:bg-slate-200 transition-colors">
+                            <input type="checkbox" class="section-complete-checkbox" data-section="uxwriting">
+                            <span class="text-xs font-medium text-slate-700">Изучено</span>
+                        </label>
+                    </div>
+
+                    <h2 class="text-3xl font-extrabold text-slate-950 mb-6 leading-tight">UX-писательство и микротекст</h2>
+                    
+                    <div class="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-6">
+                        <p class="text-lg text-slate-700 leading-relaxed">
+                            UX-писательство (UX Writing) — это проектирование интерфейсных текстов, помогающих пользователю успешно взаимодействовать с цифровым продуктом. Задача UX-писателя — сделать путь пользователя (User Journey) беспрепятственным.
+                        </p>
+
+                        <h3 class="text-xl font-bold text-slate-900 mt-8 mb-4">4 столпа сильного микротекста</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 my-6">
+                            <div class="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
+                                <h5 class="font-bold text-slate-900 text-sm mb-1">Ясность (Clear)</h5>
+                                <p class="text-xs">Никаких двусмысленностей, технического жаргона и недосказанностей.</p>
+                            </div>
+                            <div class="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
+                                <h5 class="font-bold text-slate-900 text-sm mb-1">Лаконичность (Concise)</h5>
+                                <p class="text-xs">Минимум букв для экономии экранного пространства.</p>
+                            </div>
+                            <div class="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
+                                <h5 class="font-bold text-slate-900 text-sm mb-1">Полезность (Useful)</h5>
+                                <p class="text-xs">Текст должен подсказывать следующее действие.</p>
+                            </div>
+                            <div class="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
+                                <h5 class="font-bold text-slate-900 text-sm mb-1">Тональность (On-brand)</h5>
+                                <p class="text-xs">Соответствие характеру и голосу бренда (Voice & Tone).</p>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-slate-900 mt-8 mb-4">Проектирование текстов для критических ситуаций</h3>
+                        <p>Интерфейсные ошибки (Error States) — важнейшая зона работы UX-копирайтера. Сравните два подхода:</p>
+
+                        <div class="overflow-x-auto my-6">
+                            <table class="w-full text-left border-collapse text-sm">
+                                <thead>
+                                    <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
+                                        <th class="p-3 font-semibold">Компонент</th>
+                                        <th class="p-3 font-semibold">Классическая системная ошибка</th>
+                                        <th class="p-3 font-semibold">Профессиональный UX-текст</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200">
+                                    <tr>
+                                        <td class="p-3 font-semibold text-rose-600">Заголовок</td>
+                                        <td class="p-3 text-slate-500">«Ошибка 503»</td>
+                                        <td class="p-3 font-medium">«Не удалось подключиться к серверу»</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-semibold text-rose-600">Описание</td>
+                                        <td class="p-3 text-slate-500">«Сбой сетевого сокета при инициализации»</td>
+                                        <td class="p-3 font-medium">«Проверьте подключение к интернету или обновите страницу через минуту»</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-semibold text-rose-600">Кнопка (CTA)</td>
+                                        <td class="p-3 text-slate-500">«ОК»</td>
+                                        <td class="p-3 font-medium">«Попробовать снова»</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p class="text-sm text-slate-500 italic mt-4">
+                            Источники: Торри Подмайерски, «Краткость, ясность, польза: Создание UX-текстов» (2019) <a href="#sources" class="text-blue-500 hover:underline">[8]</a>.
+                        </p>
+                    </div>
+
+                    <!-- Exercises Block -->
+                    <div class="mt-8 pt-8 border-t border-slate-100 bg-slate-50 p-6 rounded-xl">
+                        <h4 class="font-bold text-slate-900 mb-3 flex items-center">
+                            <svg class="w-5 h-5 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                            Закрепляющее упражнение: UX-редактура интерфейса
+                        </h4>
+                        <p class="text-sm text-slate-600 mb-4">
+                            Перепишите пуш-уведомление для пользователя банковского приложения, у которого закончился срок действия платежной карты. <br>
+                            <em>Исходник: «Внимание! Ваша банковская карта Visa *4432 заблокирована по причине избыточного срока действия. Обратитесь в отделение».</em>
+                        </p>
+                        <textarea class="w-full p-3 border border-slate-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500 h-24 placeholder-slate-400" placeholder="Ваша версия пуш-уведомления..."></textarea>
+                        <div class="mt-3 flex justify-between items-center">
+                            <span class="text-xs text-slate-400">Рекомендуемое время выполнения: 15 минут</span>
+                            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow transition-colors save-exercise-btn">Сохранить ответ</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module: SEO -->
+                <section id="section-seo" class="content-section bg-white rounded-2xl p-6 lg:p-10 shadow-sm border border-slate-200/80 hidden">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 font-semibold text-xs rounded-full uppercase tracking-wider">Модуль 6</span>
+                        <label class="flex items-center space-x-2 cursor-pointer bg-slate-100 px-3 py-1.5 rounded-lg hover:bg-slate-200 transition-colors">
+                            <input type="checkbox" class="section-complete-checkbox" data-section="seo">
+                            <span class="text-xs font-medium text-slate-700">Изучено</span>
+                        </label>
+                    </div>
+
+                    <h2 class="text-3xl font-extrabold text-slate-950 mb-6 leading-tight">Поисковая семантика и LSI-копирайтинг</h2>
+                    
+                    <div class="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-6">
+                        <p class="text-lg text-slate-700 leading-relaxed font-light">
+                            Современный поисковый копирайтинг полностью отошел от концепции «набивки ключевыми словами» (Keyword Stuffing). Поисковые алгоритмы Google (включая RankBrain и ИИ-поиск) ориентированы на оценку <strong>поискового интента</strong> (намерения пользователя) и соответствие факторам <strong>E-E-A-T</strong> (Опыт, Экспертность, Авторитетность, Достоверность).
+                        </p>
+
+                        <div class="chart-container">
+                            <canvas id="chartSEO"></canvas>
+                        </div>
+                        <p class="text-xs text-center text-slate-400 -mt-4 mb-8 italic">Распределение типов поисковых интентов в глобальной поисковой выдаче на 2026 год.</p>
+
+                        <h3 class="text-xl font-bold text-slate-900 mt-8 mb-4">Концепция EEAT в ранжировании контента</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 my-6">
+                            <div class="p-4 border-t-4 border-blue-500 bg-slate-50 rounded shadow-sm text-center">
+                                <div class="font-extrabold text-slate-900 text-lg mb-1">E</div>
+                                <div class="text-[11px] font-semibold text-slate-600">Experience (Опыт)</div>
+                            </div>
+                            <div class="p-4 border-t-4 border-green-500 bg-slate-50 rounded shadow-sm text-center">
+                                <div class="font-extrabold text-slate-900 text-lg mb-1">E</div>
+                                <div class="text-[11px] font-semibold text-slate-600">Expertise (Экспертность)</div>
+                            </div>
+                            <div class="p-4 border-t-4 border-amber-500 bg-slate-50 rounded shadow-sm text-center">
+                                <div class="font-extrabold text-slate-900 text-lg mb-1">A</div>
+                                <div class="text-[11px] font-semibold text-slate-600">Authoritativeness (Авторитет)</div>
+                            </div>
+                            <div class="p-4 border-t-4 border-red-500 bg-slate-50 rounded shadow-sm text-center">
+                                <div class="font-extrabold text-slate-900 text-lg mb-1">T</div>
+                                <div class="text-[11px] font-semibold text-slate-600">Trust (Доверие)</div>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-slate-900 mt-8 mb-4">LSI (Латентно-семантический анализ)</h3>
+                        <p>
+                            LSI-копирайтинг — это метод написания текстов с использованием тематически связанных слов и синонимов. Поисковый робот сопоставляет наличие LSI-слов для определения того, насколько глубоко раскрыта тема.
+                        </p>
+                        <p>Например, если ваша статья посвящена ключевому слову <em>«кофемашина»</em>, поисковый робот будет ожидать в тексте LSI-слова: <em>«капучинатор, давление в барах, помол зерен, эспрессо, очистка от накипи»</em>.</p>
+
+                        <p class="text-sm text-slate-500 italic mt-4">
+                            Источники: Google Quality Rater Guidelines (2025-2026) <a href="#sources" class="text-blue-500 hover:underline">[9]</a>.
+                        </p>
+                    </div>
+
+                    <!-- Exercises Block -->
+                    <div class="mt-8 pt-8 border-t border-slate-100 bg-slate-50 p-6 rounded-xl">
+                        <h4 class="font-bold text-slate-900 mb-3 flex items-center">
+                            <svg class="w-5 h-5 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                            Закрепляющее упражнение: Подбор LSI-семантики
+                        </h4>
+                        <p class="text-sm text-slate-600 mb-4">
+                            Составьте список из не менее чем 8 LSI-слов для написания экспертной статьи по теме <em>«Выбор зимних шин для легкового автомобиля»</em>. Опишите, какие боли водителя закроет каждое LSI-слово.
+                        </p>
+                        <textarea class="w-full p-3 border border-slate-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-500 h-28 placeholder-slate-400" placeholder="LSI-слова и их обоснование..."></textarea>
+                        <div class="mt-3 flex justify-between items-center">
+                            <span class="text-xs text-slate-400">Рекомендуемое время выполнения: 20 минут</span>
+                            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow transition-colors save-exercise-btn">Сохранить ответ</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module: General Quiz (25 Questions) -->
+                <section id="section-quiz" class="content-section bg-white rounded-2xl p-6 lg:p-10 shadow-sm border border-slate-200/80 hidden">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 bg-orange-100 text-orange-800 font-semibold text-xs rounded-full uppercase tracking-wider">Интерактивный контроль</span>
+                    </div>
+
+                    <h2 class="text-3xl font-extrabold text-slate-950 mb-4 leading-tight">Итоговый экспресс-тест (Проверьте себя)</h2>
+                    <p class="text-sm text-slate-500 mb-8 leading-relaxed">
+                        Ниже представлен полноценный профессиональный тест из 25 вопросов, охватывающий все 6 модулей нашей программы. Ответьте на все вопросы, нажмите кнопку «Проверить результаты» внизу страницы, и система автоматически подсветит ваши ошибки и выведет подробную аналитику.
+                    </p>
+
+                    <form id="masterQuizForm" class="space-y-8">
+                        
+                        <!-- Q1 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="1">
+                            <p class="font-bold text-slate-900 text-sm mb-3">1. Клод Хопкинс в книге «Научная реклама» (1923) утверждал, что реклама должна оцениваться исключительно по:</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q1" value="A"> <span>Её эстетической красоте и литературному стилю</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q1" value="B" data-correct="true"> <span>Измеримым коммерческим результатам и продажам</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q1" value="C"> <span>Узнаваемости бренда среди широких слоев населения</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q2 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="2">
+                            <p class="font-bold text-slate-900 text-sm mb-3">2. Какова главная цель информационного стиля (по М. Ильяхову)?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q2" value="A" data-correct="true"> <span>Очистить текст от мусора и донести до читателя чистую, объективную пользу</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q2" value="B"> <span>Сделать текст максимально красивым за счет эпитетов</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q2" value="C"> <span>Скрыть недостатки продукта за счет цепочки фактов</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q3 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="3">
+                            <p class="font-bold text-slate-900 text-sm mb-3">3. Главное отличие копирайтинга прямого отклика (Direct Response) от имиджевой рекламы состоит в том, что он:</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q3" value="A"> <span>Использует исключительно крупные заголовки</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q3" value="B" data-correct="true"> <span>Призывает к немедленному измеримому действию прямо сейчас</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q3" value="C"> <span>Создается только для бумажных СМИ и почтовых рассылок</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q4 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="4">
+                            <p class="font-bold text-slate-900 text-sm mb-3">4. Согласно закону «скользкой горки» Джозефа Шугермана, единственная цель первого предложения в тексте — это:</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q4" value="A" data-correct="true"> <span>Заставить читателя прочитать второе предложение</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q4" value="B"> <span>Мгновенно продать основной продукт</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q4" value="C"> <span>Предоставить сухие технические характеристики</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q5 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="5">
+                            <p class="font-bold text-slate-900 text-sm mb-3">5. Какая когнитивная система по Д. Канеману отвечает за быстрые, интуитивные и эмоциональные решения?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q5" value="A" data-correct="true"> <span>Система 1 (Быстрое мышление)</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q5" value="B"> <span>Система 2 (Медленное мышление)</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q5" value="C"> <span>Система 3 (Рефлекторное мышление)</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q6 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="6">
+                            <p class="font-bold text-slate-900 text-sm mb-3">6. В формуле AIDA ($AIDA = A \times I \times D \times A$), если множитель Action (Действие) равен нулю, общая конверсия текста:</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q6" value="A"> <span>Равна сумме остальных компонентов</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q6" value="B" data-correct="true"> <span>Равна нулю (так как это произведение множителей)</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q6" value="C"> <span>Зависит от стоимости рекламы</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q7 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="7">
+                            <p class="font-bold text-slate-900 text-sm mb-3">7. В формуле аргументации PMHS буква «M» (More Pain) отвечает за:</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q7" value="A" data-correct="true"> <span>Усиление боли, демонстрацию негативных последствий бездействия</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q7" value="B"> <span>Масштабирование бизнеса клиента</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q7" value="C"> <span>Создание интриги с помощью отзывов</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q8 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="8">
+                            <p class="font-bold text-slate-900 text-sm mb-3">8. Какой психологический триггер по Р. Чалдини активируется, когда мы сначала даем клиенту бесплатную пользу (гайд, тест), а затем просим о действии?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q8" value="A"> <span>Авторитет</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q8" value="B" data-correct="true"> <span>Взаимный обмен (Reciprocity)</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q8" value="C"> <span>Социальное доказательство</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q9 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="9">
+                            <p class="font-bold text-slate-900 text-sm mb-3">9. Что означает буква «U», отвечающая за числовое/количественное выражение пользы в формуле 4U?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q9" value="A"> <span>Usefulness (Полезность)</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q9" value="B" data-correct="true"> <span>Ultra-specificity (Специфичность)</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q9" value="C"> <span>Uniqueness (Уникальность)</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q10 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="10">
+                            <p class="font-bold text-slate-900 text-sm mb-3">10. Какую категорию заголовков выдающийся копирайтер Джон Кейплз считал самой сильной по эффективности?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q10" value="A" data-correct="true"> <span>Личный интерес (Self-interest)</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q10" value="B"> <span>Заголовки, вызывающие чистое любопытство</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q10" value="C"> <span>Заголовки с игрой слов и каламбурами</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q11 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="11">
+                            <p class="font-bold text-slate-900 text-sm mb-3">11. На каком уровне осведомленности по Юджину Шварцу клиент испытывает дискомфорт, но еще не знает, как его устранить?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q11" value="A"> <span>Полное неведение</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q11" value="B" data-correct="true"> <span>Осведомлен о проблеме (Problem Aware)</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q11" value="C"> <span>Осведомлен о продукте</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q12 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="12">
+                            <p class="font-bold text-slate-900 text-sm mb-3">12. Концепция Big Idea (Большая идея) по Дэвиду Огилви должна:</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q12" value="A"> <span>Быть понятна только узкому кругу специалистов</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q12" value="B" data-correct="true"> <span>Мгновенно вызывать интерес и заставлять взглянуть на продукт под новым углом</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q12" value="C"> <span>Состоять минимум из 15 слов для полной точности</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q13 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="13">
+                            <p class="font-bold text-slate-900 text-sm mb-3">13. Какое словосочетание является ярким проявлением канцелярита (номинализации)?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q13" value="A" data-correct="true"> <span>«Осуществлять проведение проверочных мероприятий»</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q13" value="B"> <span>«Проверить систему»</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q13" value="C"> <span>«Запустить сервер»</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q14 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="14">
+                            <p class="font-bold text-slate-900 text-sm mb-3">14. Почему пассивный залог ухудшает динамику коммерческого текста?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q14" value="A" data-correct="true"> <span>Он убирает действующее лицо и утяжеляет конструкцию предложения</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q14" value="B"> <span>Он запрещен правилами русского языка</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q14" value="C"> <span>Он делает текст слишком коротким</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q15 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="15">
+                            <p class="font-bold text-slate-900 text-sm mb-3">15. Какое из этих выражений содержит плеоназм?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q15" value="A"> <span>«Высокое качество»</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q15" value="B" data-correct="true"> <span>«Главный приоритет»</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q15" value="C"> <span>«Эффективное решение»</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q16 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="16">
+                            <p class="font-bold text-slate-900 text-sm mb-3">16. Для удержания внимания читателя при помощи темпоритма синтаксиса следует:</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q16" value="A"> <span>Писать строго короткими предложениями по 3 слова</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q16" value="B" data-correct="true"> <span>Чередовать короткие, средние и длинные предложения</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q16" value="C"> <span>Использовать только сложные союзные предложения</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q17 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="17">
+                            <p class="font-bold text-slate-900 text-sm mb-3">17. Каким образом движется взгляд пользователя при F-паттерне веб-чтения?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q17" value="A" data-correct="true"> <span>По двум горизонтальным блокам и вертикально вниз вдоль левой границы</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q17" value="B"> <span>По строгой диагонали из левого верхнего угла в правый нижний</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q17" value="C"> <span>Равномерно сканирует всю страницу строка за строкой</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q18 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="18">
+                            <p class="font-bold text-slate-900 text-sm mb-3">18. Паттерн «слоёного пирога» (Layer Cake) в веб-юзабилити контента означает, что пользователь:</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q18" value="A"> <span>Изучает исключительно изображения и инфографику</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q18" value="B" data-correct="true"> <span>Сканирует только заголовки и списки, полностью пропуская сплошной текст</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q18" value="C"> <span>Читает только первое слово каждого абзаца</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q19 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="19">
+                            <p class="font-bold text-slate-900 text-sm mb-3">19. Какова наиболее оптимальная длина строки текста в веб-среде для удержания концентрации внимания?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q19" value="A"> <span>От 20 до 40 символов с пробелами</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q19" value="B" data-correct="true"> <span>От 50 до 75 символов с пробелами</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q19" value="C"> <span>Свыше 120 символов с пробелами</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q20 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="20">
+                            <p class="font-bold text-slate-900 text-sm mb-3">20. С какой целью в веб-копирайтинге используется концепция «воздуха» (белого пространства)?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q20" value="A" data-correct="true"> <span>Для снижения когнитивной нагрузки и направления взгляда читателя</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q20" value="B"> <span>Чтобы искусственно увеличить длину веб-страницы</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q20" value="C"> <span>Для скрытия незаполненных блоков с текстом</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q21 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="21">
+                            <p class="font-bold text-slate-900 text-sm mb-3">21. Что является первоочередной профессиональной целью UX-писателя?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q21" value="A"> <span>Максимально поднять продажи товаров через форму заказа</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q21" value="B" data-correct="true"> <span>Сделать взаимодействие пользователя с интерфейсом беспрепятственным</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q21" value="C"> <span>Разработать SEO-описание для магазина приложений</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q22 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="22">
+                            <p class="font-bold text-slate-900 text-sm mb-3">22. Какое сообщение об ошибке в интерфейсе спроектировано наиболее грамотно с точки зрения UX?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q22" value="A"> <span>«Системный сбой 0x443. Ввод некорректных данных.»</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q22" value="B" data-correct="true"> <span>«Неверный пароль. Попробуйте еще раз или восстановите его.»</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q22" value="C"> <span>«Вы ввели неправильный символ. Ошибка на вашей стороне.»</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q23 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="23">
+                            <p class="font-bold text-slate-900 text-sm mb-3">23. Микрокопия для конверсионной кнопки CTA должна отвечать на мысленный запрос пользователя:</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q23" value="A" data-correct="true"> <span>«Я хочу...» (должна содержать глагол действия)</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q23" value="B"> <span>«Что это такое?» (должна быть описательным существительным)</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q23" value="C"> <span>«Каковы условия?» (должна содержать цену товара)</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q24 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="24">
+                            <p class="font-bold text-slate-900 text-sm mb-3">24. В современных поисковых алгоритмах аббревиатура E-E-A-T расшифровывается как:</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q24" value="A"> <span>Энергия, Эффективность, Актуальность, Точность</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q24" value="B" data-correct="true"> <span>Experience, Expertise, Authoritativeness, Trustworthiness (Опыт, Экспертность, Авторитетность, Доверие)</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q24" value="C"> <span>Экологичность контента, Эстетика верстки, Активность аудитории, Трафик</span></label>
+                            </div>
+                        </div>
+
+                        <!-- Q25 -->
+                        <div class="p-6 bg-slate-50 rounded-xl border border-slate-200/60 question-card" data-q="25">
+                            <p class="font-bold text-slate-900 text-sm mb-3">25. Что такое LSI-слова в контексте написания текстов под поисковые роботы нового поколения?</p>
+                            <div class="space-y-2 text-xs">
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q25" value="A"> <span>Прямые вхождения главного поискового запроса</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q25" value="B" data-correct="true"> <span>Тематически связанные слова, синонимы и термины, доказывающие раскрытие темы</span></label>
+                                <label class="flex items-center space-x-3 p-2 hover:bg-slate-100 rounded cursor-pointer"><input type="radio" name="q25" value="C"> <span>Скрытые мета-теги в исходном коде веб-страницы</span></label>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <div class="mt-8 p-6 bg-slate-100 rounded-xl border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <button type="button" id="checkMasterQuizBtn" class="px-6 py-3 bg-brand-orange hover:bg-brand-orangeHover text-white rounded-xl font-bold shadow text-sm transition-colors self-start">Проверить результаты</button>
+                        <div id="masterQuizResult" class="text-sm font-semibold hidden"></div>
+                    </div>
+                </section>
+
+                <!-- Module: Sources -->
+                <section id="section-sources" class="content-section bg-slate-900 text-slate-300 rounded-2xl p-6 lg:p-10 shadow-sm border border-slate-800 transition-all duration-300 hidden">
+                    <h2 class="text-2xl font-extrabold text-white mb-6 flex items-center">
+                        <svg class="w-6 h-6 mr-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        Академические и профессиональные источники
+                    </h2>
+                    
+                    <div class="prose prose-invert max-w-none text-slate-400 text-sm leading-relaxed space-y-4">
+                        <p class="mb-4">
+                            Данное методическое пособие составлено на основе фундаментальной литературы, признанных руководств и исследований в области коммерческой редактуры, UX-дизайна и поисковой оптимизации:
+                        </p>
+                        
+                        <ol class="list-decimal pl-5 space-y-3">
+                            <li><strong class="text-white">Хопкинс К.</strong> Научная реклама = Scientific Advertising. — М.: Эксмо, 2023. — 128 с.</li>
+                            <li><strong class="text-white">Ильяхов М., Сарычева Л.</strong> Пиши, сокращай. Как создавать сильный текст. — М.: Альпина Паблишер, 2016. — 440 с.</li>
+                            <li><strong class="text-white">Чалдини Р.</strong> Психология влияния. — СПб.: Питер, 2021. — 480 с.</li>
+                            <li><strong class="text-white">Кейплз Дж.</strong> Проверенные методы рекламы = Tested Advertising Methods. — М.: Вильямс, 2018. — 384 с.</li>
+                            <li><strong class="text-white">Галь Н.</strong> Слово живое и мертвое. — М.: АСТ, 2019. — 320 с.</li>
+                            <li><strong class="text-white">Зинсер У.</strong> Как писать хорошо. Классическое руководство по созданию нехудожественных текстов. — М.: Альпина Паблишер, 2021. — 292 с.</li>
+                            <li><strong class="text-white">Нильсен Я.</strong> Веб-дизайн. Удобство использования веб-сайтов = Designing Web Usability. — М.: Символ-Плюс, 2011. — 400 с.</li>
+                            <li><strong class="text-white">Подмайерски Т.</strong> Краткость, ясность, польза: Создание UX-текстов для интерфейсов = Strategic Writing for UX. — М.: МИФ, 2020. — 192 с.</li>
+                            <li><strong class="text-white">Google Search Quality Rater Guidelines</strong> (Updated 2026) / Official Assessor Manual [Электронный ресурс]. — URL: <span class="code-font text-blue-400">static.googleusercontent.com</span></li>
+                        </ol>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Script to manage SPA state, navigation, charts, exercises, and quiz logic -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const sections = document.querySelectorAll(".content-section");
+            const navItems = document.querySelectorAll(".nav-item");
+            const searchInput = document.getElementById("chapterSearch");
+            const toggleHeatmapBtn = document.getElementById("toggleHeatmapBtn");
+            const heatmapOverlay = document.getElementById("heatmapOverlay");
+            const checkboxes = document.querySelectorAll(".section-complete-checkbox");
+            const progressPercentText = document.getElementById("progressPercent");
+            const progressBar = document.getElementById("progressBar");
+            
+            // Mobile Menu selectors
+            const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+            const closeMobileMenuBtn = document.getElementById("closeMobileMenuBtn");
+            const sidebar = document.getElementById("sidebar");
+
+            // LocalStorage State
+            let completedSections = JSON.parse(localStorage.getItem("completedCopywritingSections_2026")) || [];
+
+            // Mobile menu handlers
+            if (mobileMenuBtn && sidebar) {
+                mobileMenuBtn.addEventListener("click", () => {
+                    sidebar.classList.remove("-translate-x-full");
+                });
+            }
+            if (closeMobileMenuBtn && sidebar) {
+                closeMobileMenuBtn.addEventListener("click", () => {
+                    sidebar.classList.add("-translate-x-full");
+                });
+            }
+
+            // Route state controller
+            function handleRouting() {
+                let activeId = window.location.hash.substring(1) || 'overview';
+                const validIds = ['overview', 'psychology', 'headlines', 'stylistics', 'usability', 'uxwriting', 'seo', 'quiz', 'sources'];
+                if (!validIds.includes(activeId)) activeId = 'overview';
+
+                sections.forEach(section => {
+                    const secId = section.getAttribute("id");
+                    if (secId === 'section-' + activeId) {
+                        section.classList.remove("hidden");
+                    } else {
+                        section.classList.add("hidden");
+                    }
+                });
+
+                // Update active navigation item styling
+                navItems.forEach(item => {
+                    const target = item.getAttribute("data-target");
+                    const dot = item.querySelector("span");
+                    if (target === activeId) {
+                        item.classList.add("bg-slate-800", "text-white");
+                        item.classList.remove("text-slate-400");
+                        if (dot) {
+                            dot.classList.remove("bg-slate-600");
+                            dot.classList.add("bg-brand-orange");
+                        }
+                    } else {
+                        item.classList.remove("bg-slate-800", "text-white");
+                        item.classList.add("text-slate-400");
+                        if (dot && target !== 'quiz') {
+                            dot.classList.remove("bg-brand-orange");
+                            dot.classList.add("bg-slate-600");
+                        }
+                    }
+                });
+
+                // Trigger lazy chart rendering
+                if (activeId === 'psychology') {
+                    renderPsychologyChart();
+                } else if (activeId === 'headlines') {
+                    renderHeadlinesChart();
+                } else if (activeId === 'seo') {
+                    renderSEOChart();
+                }
+
+                // Scroll view smoothly to top on tab changes
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Auto close mobile nav on switch
+                if (window.innerWidth < 1024 && sidebar) {
+                    sidebar.classList.add("-translate-x-full");
+                }
+            }
+
+            window.addEventListener("hashchange", handleRouting);
+            window.addEventListener("load", handleRouting);
+
+            // Progress Calculation Engine
+            function updateProgress() {
+                const total = checkboxes.length;
+                const completedCount = completedSections.length;
+                const percent = total > 0 ? Math.round((completedCount / total) * 100) : 0;
+                
+                if (progressBar) progressBar.style.width = `${percent}%`;
+                if (progressPercentText) progressPercentText.textContent = `${percent}%`;
+                
+                checkboxes.forEach(cb => {
+                    const sec = cb.getAttribute("data-section");
+                    cb.checked = completedSections.includes(sec);
+                });
+            }
+
+            // Bind checkbox events
+            checkboxes.forEach(cb => {
+                const sectionId = cb.getAttribute("data-section");
+                
+                cb.addEventListener("change", (e) => {
+                    if (e.target.checked) {
+                        if (!completedSections.includes(sectionId)) {
+                            completedSections.push(sectionId);
+                        }
+                    } else {
+                        completedSections = completedSections.filter(item => item !== sectionId);
+                    }
+                    localStorage.setItem("completedCopywritingSections_2026", JSON.stringify(completedSections));
+                    updateProgress();
+                });
+            });
+
+            updateProgress();
+
+            // Quick Search Tool
+            if (searchInput) {
+                searchInput.addEventListener("input", (e) => {
+                    const query = e.target.value.toLowerCase().trim();
+                    if (query === "") return;
+                    
+                    // Show dynamic match feedback across hidden modules if search is active
+                    navItems.forEach(item => {
+                        const target = item.getAttribute("data-target");
+                        const section = document.getElementById('section-' + target);
+                        if (section) {
+                            const text = section.textContent.toLowerCase();
+                            if (text.includes(query)) {
+                                item.classList.add("border-r-2", "border-blue-500");
+                            } else {
+                                item.classList.remove("border-r-2", "border-blue-500");
+                            }
+                        }
+                    });
+                });
+
+                document.addEventListener("keydown", (e) => {
+                    if (e.key === "Escape") {
+                        searchInput.value = "";
+                        navItems.forEach(item => item.classList.remove("border-r-2", "border-blue-500"));
+                    }
+                });
+            }
+
+            // Toggle Heatmap Sim
+            if (toggleHeatmapBtn && heatmapOverlay) {
+                let isHeatmapActive = false;
+                toggleHeatmapBtn.addEventListener("click", () => {
+                    isHeatmapActive = !isHeatmapActive;
+                    if (isHeatmapActive) {
+                        heatmapOverlay.classList.remove("opacity-0");
+                        heatmapOverlay.classList.add("opacity-100");
+                        toggleHeatmapBtn.textContent = "Скрыть тепловую карту";
+                        toggleHeatmapBtn.classList.remove("bg-slate-800");
+                        toggleHeatmapBtn.classList.add("bg-rose-600");
+                    } else {
+                        heatmapOverlay.classList.remove("opacity-100");
+                        heatmapOverlay.classList.add("opacity-0");
+                        toggleHeatmapBtn.textContent = "Включить тепловую карту";
+                        toggleHeatmapBtn.classList.remove("bg-rose-600");
+                        toggleHeatmapBtn.classList.add("bg-slate-800");
+                    }
+                });
+            }
+
+            // Save Exercise Button Feedback
+            const saveButtons = document.querySelectorAll(".save-exercise-btn");
+            saveButtons.forEach(btn => {
+                btn.addEventListener("click", (e) => {
+                    const container = e.target.closest(".rounded-xl");
+                    const textarea = container.querySelector("textarea");
+                    if (textarea && textarea.value.trim() !== "") {
+                        btn.textContent = "Успешно сохранено!";
+                        btn.classList.remove("bg-blue-600");
+                        btn.classList.add("bg-green-600");
+                        setTimeout(() => {
+                            btn.textContent = "Сохранить ответ";
+                            btn.classList.remove("bg-green-600");
+                            btn.classList.add("bg-blue-600");
+                        }, 2500);
+                    } else {
+                        // Custom premium in-app warning notification instead of standard block alert
+                        const warningMsg = document.createElement("div");
+                        warningMsg.className = "fixed bottom-5 right-5 bg-amber-500 text-slate-900 px-4 py-3 rounded-lg shadow-xl font-bold text-xs z-50 transition-opacity duration-300";
+                        warningMsg.textContent = "Пожалуйста, напишите ответ перед сохранением.";
+                        document.body.appendChild(warningMsg);
+                        setTimeout(() => {
+                            warningMsg.style.opacity = "0";
+                            setTimeout(() => warningMsg.remove(), 300);
+                        }, 2500);
+                    }
+                });
+            });
+
+            // Master Quiz Verification (25 Questions Engine)
+            const checkMasterQuizBtn = document.getElementById("checkMasterQuizBtn");
+            const masterQuizResult = document.getElementById("masterQuizResult");
+
+            if (checkMasterQuizBtn) {
+                checkMasterQuizBtn.addEventListener("click", () => {
+                    const form = document.getElementById("masterQuizForm");
+                    const questionCards = document.querySelectorAll(".question-card");
+                    let score = 0;
+                    let unanswered = 0;
+
+                    questionCards.forEach(card => {
+                        const qNum = card.getAttribute("data-q");
+                        const selectedInput = card.querySelector(`input[name="q${qNum}"]:checked`);
+                        
+                        // Clear previous diagnostics colors
+                        card.classList.remove("border-emerald-500", "border-rose-500", "bg-emerald-50/20", "bg-rose-50/20");
+                        
+                        if (!selectedInput) {
+                            unanswered++;
+                            card.classList.add("border-rose-300");
+                        } else {
+                            const isCorrect = selectedInput.hasAttribute("data-correct");
+                            if (isCorrect) {
+                                score++;
+                                card.classList.add("border-emerald-500", "bg-emerald-50/20");
+                            } else {
+                                card.classList.add("border-rose-500", "bg-rose-50/20");
+                                // Highlight correct answer helper
+                                const correctOption = card.querySelector('input[data-correct="true"]');
+                                if (correctOption) {
+                                    correctOption.closest("label").classList.add("text-emerald-700", "font-bold");
+                                }
+                            }
+                        }
+                    });
+
+                    if (unanswered > 0) {
+                        masterQuizResult.innerHTML = `Вы ответили не на все вопросы. Пожалуйста, завершите тест (осталось вопросов: ${unanswered}).`;
+                        masterQuizResult.className = "text-sm font-semibold text-rose-600 block";
+                        masterQuizResult.classList.remove("hidden");
+                        return;
+                    }
+
+                    // Display Score
+                    const percentage = Math.round((score / 25) * 100);
+                    let appraisal = "";
+                    let appraisalClass = "";
+
+                    if (score === 25) {
+                        appraisal = "Идеальный результат! Вы настоящий эксперт копирайтинга.";
+                        appraisalClass = "text-emerald-600";
+                    } else if (score >= 20) {
+                        appraisal = "Отличные глубокие знания! Незначительные пробелы можно легко повторить.";
+                        appraisalClass = "text-blue-600";
+                    } else if (score >= 15) {
+                        appraisal = "Хороший базовый уровень. Рекомендуется перечитать разделы стилистики и UX.";
+                        appraisalClass = "text-amber-600";
+                    } else {
+                        appraisal = "Материал усвоен слабо. Пожалуйста, изучите теорию повторно.";
+                        appraisalClass = "text-rose-600";
+                    }
+
+                    masterQuizResult.innerHTML = `Ваш результат: <span class="font-extrabold">${score} / 25</span> правильных ответов (${percentage}%). <br> <span class="${appraisalClass} mt-1 block">${appraisal}</span>`;
+                    masterQuizResult.classList.remove("hidden");
+                    masterQuizResult.scrollIntoView({ behavior: "smooth", block: "center" });
+                });
+            }
+
+            // Chart Rendering logic
+            let psychChart = null;
+            let headChart = null;
+            let seoChart = null;
+
+            function renderPsychologyChart() {
+                if (psychChart) return; // Prevent double rendering
+                const ctx = document.getElementById("chartPsychology");
+                if (!ctx) return;
+                
+                psychChart = new Chart(ctx.getContext('2d'), {
+                    type: 'radar',
+                    data: {
+                        labels: ['Авторитет', 'Социальное док-во', 'Дефицит', 'Взаимность', 'Симпатия', 'Последовательность'],
+                        datasets: [{
+                            label: 'Индекс влияния триггера (%)',
+                            data: [94, 98, 89, 87, 72, 80],
+                            backgroundColor: 'rgba(249, 115, 22, 0.2)',
+                            borderColor: '#f97316',
+                            pointBackgroundColor: '#0f172a',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: { display: false }
+                            }
+                        },
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
+
+            function renderHeadlinesChart() {
+                if (headChart) return;
+                const ctx = document.getElementById("chartHeadlines");
+                if (!ctx) return;
+
+                headChart = new Chart(ctx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Личная выгода', 'Новости', 'Любопытство', 'Игра слов / Юмор'],
+                        datasets: [{
+                            label: 'Индекс конверсии (%)',
+                            data: [89, 78, 44, 11],
+                            backgroundColor: ['#0f172a', '#334155', '#94a3b8', '#e2e8f0'],
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: true, max: 100 }
+                        }
+                    }
+                });
+            }
+
+            function renderSEOChart() {
+                if (seoChart) return;
+                const ctx = document.getElementById("chartSEO");
+                if (!ctx) return;
+
+                seoChart = new Chart(ctx.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Информационный интент', 'Коммерческий интент', 'Транзакционный интент', 'Навигационный интент'],
+                        datasets: [{
+                            data: [62.4, 15.1, 13.5, 9.0],
+                            backgroundColor: ['#0f172a', '#f97316', '#475569', '#cbd5e1'],
+                            hoverOffset: 10
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '70%',
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { boxWidth: 12, font: { size: 10 } }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
